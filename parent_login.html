@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+html {
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    color: white;
+    padding: 20px 20px;
+    z-index: 1000;
+}
+
+.logo img {
+    margin-left: 10px;
+    width: 180px;
+    height: 37px;
+}
+
+.logo h2 {
+    margin: 0;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #f4f8fb;
+}
+
+/* Dropdown Styles */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    z-index: 10;
+    width: max-content;
+}
+
+.dropdown-content a {
+    color: #2c3e50;
+    padding: 8px 15px;
+    display: block;
+    transition: background-color 0.3s;
+    font-size: 0.9rem; /* Smaller text for dropdown items */
+}
+
+.dropdown-content a:hover {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Menu Button for Mobile */
+.menu-button {
+    display: none;
+    background-color: #2c3e50;
+    color: white;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Mobile View - Show/hide the nav menu */
+.nav-menu {
+    display: flex;
+}
+
+.nav-menu.mobile {
+    display: block;
+}
+
+/* Login Form Styles */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Change absolute to relative */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top:0; /* Ensure space from navbar */
+    margin-bottom: 50px; /* Ensure space from footer */
+    z-index: 500;
+}
+
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    padding: 12px;
+}
+
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px;
+    font-size: 1rem;
+    border: #18212b;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4ca1af;
+    box-shadow: 0 0 5px rgba(76, 161, 175, 0.5);
+}
+
+.login-button {
+    background: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 8px;
+    font-size: 1rem;
+    border-radius: 13px;
+    cursor: pointer;
+    width: 90%;
+    padding: 13px;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background: #405f76;
+}
+
+/* Footer Styles */
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px 20px;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        align-items: center;
+        display: none;
+        position: absolute;
+        background: #2c3e50;
+        width: 100%;
+        top: 60px;
+        left: 0;
+    }
+
+    .nav-menu.mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: fixed;
+    top: 60px;  /* Adjust this value based on your navbar height */
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .login-container {
+        width: 80%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .login-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group input {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .login-button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-menu {
+        gap: 10px;
+    }
+
+    .login-container {
+        width: 90%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .login-container h2 {
+        font-size: 1.2rem;
+    }
+
+    .form-group input {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .login-button {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+}
+.flash-messages {
+        transition: opacity 1s ease-out;
+        border-radius: 12px;
+
+    }
+
+    .flash-messages .alert {
+        padding: 10px;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+
+    .flash-messages .alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        border-radius: 12px;
+    }  
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Logo.png') }}" alt="Logo">
+            </div>
+            <button class="menu-button" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#">Login</a>
+                    <div class="dropdown-content">
+                        <a href="/login">Student</a>
+                        <a href="/admin_login">Counsellor</a>
+                        <a href="/parent_login">Parent</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Registration</a>
+                    <div class="dropdown-content">
+                        <a href="/studentreg">Student</a>
+                        <a href="/register_parent">Parent</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    
+
+    <!-- Main Content -->
+    <div class="login-container">
+        <h2>Parent Login</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form><br>
+        <div class="registerhere">
+            <p>Don't have an account? <a href="/register_parent"><strong><u>Register here</u></strong></a></p>
+        </div>
+        <div class="flash-messages">
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ 'alert-success' if category == 'success' else 'alert-danger' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+            </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 ManoShakti. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('mobile');
+        }
+
+    
+        setTimeout(() => {
+    const flashMessages = document.querySelector('.flash-messages');
+    if (flashMessages) {
+        flashMessages.style.opacity = '0';
+        setTimeout(() => flashMessages.style.display = 'none', 1000); // Wait for fade-out
+    }
+    }, 5000);
+    </script>
+</body>
+
+</html>

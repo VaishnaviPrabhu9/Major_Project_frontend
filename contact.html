@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="./static/css/contact.css">
+
+<div class="container">
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <div class="contact-info">
+            <div class="contact-box">
+                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="details">
+                    <h3>Our Location</h3>
+                    <p>123 Wellness St., Suite 456, Mindfulness City, MH 89012</p>
+                </div>
+            </div>
+            <div class="contact-box">
+                <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="details">
+                    <h3>Call Us</h3>
+                    <p>+1 800-123-4567</p>
+                    <p>+1 800-789-1011</p>
+                </div>
+            </div>
+            <div class="contact-box">
+                <div class="icon"><i class="fas fa-envelope"></i></div>
+                <div class="details">
+                    <h3>Email Us</h3>
+                    <p>support@manoshakthi.org</p>
+                    <p>info@manoshakthi.org</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Get in Touch</h2>
+            <form action="/submit_contact" method="POST">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

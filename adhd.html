@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHD Questionnaire</title>
+    <style>
+        /* General styles for body and html to fit screen and prevent overflow */
+        /* General styles for body and html to fit screen and prevent overflow */
+/* General styles for body and html to fit screen and prevent overflow */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background:  #e8f4f8;
+    color: #333;
+}
+
+.logo img{
+    margin-left: 10px;
+    width: 180px;
+    height: 37px;
+}
+/* Full-width header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 15px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header img {
+    height: 40px;
+}
+
+.header button {
+    background: #505962;
+    color: #eaedf0;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 1001; /* Ensure the button stays above the header */
+    position: relative; /* Fixes button position */
+    left: -2cm; /* Move the button 2 cm to the left */
+}
+
+.header button:hover {
+    background: #505962;
+}
+
+/* Questionnaire container */
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
+    margin: 100px auto 20px; /* Added margin-top to create space below the fixed header */
+    border-radius: 12px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding-bottom: 20px; /* Prevent bottom overflow */
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+/* Header inside the container */
+header {
+    background-color: #34495e;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+header p {
+    font-size: 16px;
+    margin: 5px 0 0;
+}
+
+/* Form styles */
+form {
+    padding: 20px;
+    overflow-y: auto; /* Allow scrolling within the form if needed */
+    flex-grow: 1; /* Allow form to grow and fill remaining space */
+}
+
+/* Styling for each form element */
+h3 {
+    margin-top: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+.form-group:last-child {
+    border-bottom: none;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+button[type="submit"] {
+    width: 100%;
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #505962;
+}
+
+        /* Footer Styles */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- Full-width Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Logo.png') }}" alt="Logo">
+        </div>
+        <button onclick="history.back()">Back</button>
+    </div>
+
+    <!-- Questionnaire Container -->
+    <div class="container">
+        <header>
+            <h1>ADHD Questionnaire</h1>
+            <p>Answer honestly to help evaluate symptoms.</p>
+        </header>
+
+        <form action="/submit_adhd" method="POST">
+           
+            <div class="form-group">
+                <label>1. How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?</label>
+                <label><input type="radio" name="q1" value="0" required> Never</label>
+                <label><input type="radio" name="q1" value="1"> Rarely</label>
+                <label><input type="radio" name="q1" value="2"> Sometimes</label>
+                <label><input type="radio" name="q1" value="3"> Often</label>
+                <label><input type="radio" name="q1" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>2. How often do you have difficulty getting things in order when you have to do a task that requires organization?</label>
+                <label><input type="radio" name="q2" value="0" required> Never</label>
+                <label><input type="radio" name="q2" value="1"> Rarely</label>
+                <label><input type="radio" name="q2" value="2"> Sometimes</label>
+                <label><input type="radio" name="q2" value="3"> Often</label>
+                <label><input type="radio" name="q2" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>3. How often do you have problems remembering appointments or obligations?</label>
+                <label><input type="radio" name="q3" value="0" required> Never</label>
+                <label><input type="radio" name="q3" value="1"> Rarely</label>
+                <label><input type="radio" name="q3" value="2"> Sometimes</label>
+                <label><input type="radio" name="q3" value="3"> Often</label>
+                <label><input type="radio" name="q3" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>4. When you have a task that requires a lot of thought, how often do you avoid or delay getting started?</label>
+                <label><input type="radio" name="q4" value="0" required> Never</label>
+                <label><input type="radio" name="q4" value="1"> Rarely</label>
+                <label><input type="radio" name="q4" value="2"> Sometimes</label>
+                <label><input type="radio" name="q4" value="3"> Often</label>
+                <label><input type="radio" name="q4" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>5. How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?</label>
+                <label><input type="radio" name="q5" value="0" required> Never</label>
+                <label><input type="radio" name="q5" value="1"> Rarely</label>
+                <label><input type="radio" name="q5" value="2"> Sometimes</label>
+                <label><input type="radio" name="q5" value="3"> Often</label>
+                <label><input type="radio" name="q5" value="4"> Very Often</label>
+            </div>
+
+            <!-- Add all remaining questions similarly -->
+            <!-- Example for Questions 6 through 18 -->
+
+            <div class="form-group">
+                <label>6. How often do you feel overly active and compelled to do things, like you were driven by a motor?</label>
+                <label><input type="radio" name="q6" value="0" required> Never</label>
+                <label><input type="radio" name="q6" value="1"> Rarely</label>
+                <label><input type="radio" name="q6" value="2"> Sometimes</label>
+                <label><input type="radio" name="q6" value="3"> Often</label>
+                <label><input type="radio" name="q6" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>7. How often do you make careless mistakes when you have to work on a boring or difficult project?</label>
+                <label><input type="radio" name="q7" value="0" required> Never</label>
+                <label><input type="radio" name="q7" value="1"> Rarely</label>
+                <label><input type="radio" name="q7" value="2"> Sometimes</label>
+                <label><input type="radio" name="q7" value="3"> Often</label>
+                <label><input type="radio" name="q7" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>8. How often do you have difficulty keeping your attention when you are doing boring or repetitive work?</label>
+                <label><input type="radio" name="q8" value="0" required> Never</label>
+                <label><input type="radio" name="q8" value="1"> Rarely</label>
+                <label><input type="radio" name="q8" value="2"> Sometimes</label>
+                <label><input type="radio" name="q8" value="3"> Often</label>
+                <label><input type="radio" name="q8" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>9. How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?</label>
+                <label><input type="radio" name="q9" value="0" required> Never</label>
+                <label><input type="radio" name="q9" value="1"> Rarely</label>
+                <label><input type="radio" name="q9" value="2"> Sometimes</label>
+                <label><input type="radio" name="q9" value="3"> Often</label>
+                <label><input type="radio" name="q9" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>10. How often do you misplace or have difficulty finding things at home or at work?</label>
+                <label><input type="radio" name="q10" value="0" required> Never</label>
+                <label><input type="radio" name="q10" value="1"> Rarely</label>
+                <label><input type="radio" name="q10" value="2"> Sometimes</label>
+                <label><input type="radio" name="q10" value="3"> Often</label>
+                <label><input type="radio" name="q10" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>11. How often are you distracted by activity or noise around you?</label>
+                <label><input type="radio" name="q11" value="0" required> Never</label>
+                <label><input type="radio" name="q11" value="1"> Rarely</label>
+                <label><input type="radio" name="q11" value="2"> Sometimes</label>
+                <label><input type="radio" name="q11" value="3"> Often</label>
+                <label><input type="radio" name="q11" value="4"> Very Often</label>
+            </div>
+			
+			<div class="form-group">
+                <label>12. How often do you leave your seat in meetings or other situations in which you are expected to remain seated?</label>
+                <label><input type="radio" name="q12" value="0" required> Never</label>
+                <label><input type="radio" name="q12" value="1"> Rarely</label>
+                <label><input type="radio" name="q12" value="2"> Sometimes</label>
+                <label><input type="radio" name="q12" value="3"> Often</label>
+                <label><input type="radio" name="q12" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>13. How often do you feel restless or fidgety?</label>
+                <label><input type="radio" name="q13" value="0" required> Never</label>
+                <label><input type="radio" name="q13" value="1"> Rarely</label>
+                <label><input type="radio" name="q13" value="2"> Sometimes</label>
+                <label><input type="radio" name="q13" value="3"> Often</label>
+                <label><input type="radio" name="q13" value="4"> Very Often</label>
+            </div>
+			<div class="form-group">
+                <label>14. How often do you have difficulty unwinding and relaxing when you have time to yourself?</label>
+                <label><input type="radio" name="q14" value="0" required> Never</label>
+                <label><input type="radio" name="q14" value="1"> Rarely</label>
+                <label><input type="radio" name="q14" value="2"> Sometimes</label>
+                <label><input type="radio" name="q14" value="3"> Often</label>
+                <label><input type="radio" name="q14" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>15. How often do you find yourself talking too much when you are in social situations?</label>
+                <label><input type="radio" name="q15" value="0" required> Never</label>
+                <label><input type="radio" name="q15" value="1"> Rarely</label>
+                <label><input type="radio" name="q15" value="2"> Sometimes</label>
+                <label><input type="radio" name="q15" value="3"> Often</label>
+                <label><input type="radio" name="q15" value="4"> Very Often</label>
+            </div>
+			<div class="form-group">
+                <label>16. When you’re in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?</label>
+                <label><input type="radio" name="q16" value="0" required> Never</label>
+                <label><input type="radio" name="q16" value="1"> Rarely</label>
+                <label><input type="radio" name="q16" value="2"> Sometimes</label>
+                <label><input type="radio" name="q16" value="3"> Often</label>
+                <label><input type="radio" name="q16" value="4"> Very Often</label>
+            </div>
+
+            <div class="form-group">
+                <label>17. How often do you have difficulty waiting your turn in situations when turn taking is required?</label>
+                <label><input type="radio" name="q17" value="0" required> Never</label>
+                <label><input type="radio" name="q17" value="1"> Rarely</label>
+                <label><input type="radio" name="q17" value="2"> Sometimes</label>
+                <label><input type="radio" name="q17" value="3"> Often</label>
+                <label><input type="radio" name="q17" value="4"> Very Often</label>
+            </div>
+			<div class="form-group">
+                <label>18. How often do you interrupt others when they are busy?</label>
+                <label><input type="radio" name="q18" value="0" required> Never</label>
+                <label><input type="radio" name="q18" value="1"> Rarely</label>
+                <label><input type="radio" name="q18" value="2"> Sometimes</label>
+                <label><input type="radio" name="q18" value="3"> Often</label>
+                <label><input type="radio" name="q18" value="4"> Very Often</label>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 ManoShakthi. All rights reserved.</p>
+    </footer>
+</body>
+</html>

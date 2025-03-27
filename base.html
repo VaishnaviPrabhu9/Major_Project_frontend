@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ManoShakthi{% endblock %}</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #2c3e50;
+            color: white;
+            padding: 20px 20px;
+        }
+        .logo img {
+            height: 37px; /* Adjust the height as needed */
+            width: 180px; 
+            margin-left: 10px;/* Maintain aspect ratio */
+        }
+
+        .logo h2 {
+            margin: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #f4f8fb;
+        }
+        .menu-button {
+        display: none;
+        background-color: #2c3e50;
+        color: white;
+        font-size: 30px;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+        }
+
+        /* Mobile View - Show/hide the nav menu */
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu.mobile {
+            display: block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            color: #2c3e50;
+            padding: 10px 20px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Footer Styles */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+        /* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        align-items: center;
+        display: none;
+        position: absolute;
+        background: #2c3e50;
+        width: 100%;
+        top: 60px;
+        left: 0;
+    }
+
+    .nav-menu.mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: fixed;
+    top: 60px;  /* Adjust this value based on your navbar height */
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+    }
+
+    .menu-button {
+        display: block;
+            }
+
+    .login-container {
+        width: 80%;
+        margin-top: 100px;
+    }
+
+    .login-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group input {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .login-button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-menu {
+        gap: 10px;
+    }
+
+    .login-container {
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    .login-container h2 {
+        font-size: 1.2rem;
+    }
+
+    .form-group input {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .login-button {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="navbar">
+             <div class="logo">
+                <img src="{{ url_for('static', filename='Logo.png') }}" alt="Logo">
+            </div>
+             <button class="menu-button" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#">Login</a>
+                    <div class="dropdown-content">
+                        <a href="/login">Student</a>
+                        <a href="/admin_login">Counsellor</a>
+                        <a href="/parent_login">Parent</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Registration</a>
+                    <div class="dropdown-content">
+                        <a href="/studentreg">Student</a>
+                        <a href="/register_parent">Parent</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 ManoShakthi. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('mobile');
+        }
+        </script>
+
+</body>
+
+</html> 
